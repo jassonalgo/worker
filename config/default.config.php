@@ -1,6 +1,7 @@
 <?php
 ## proccess variables
 define("NUMBER_ITEMS_MIGRATE",     "");
+define("FROM_PATH_DB",     "");
 ## log variables
 define("GENERAL_LOG_PATH",     "");
 define("GENERAL_LOG_FILE",     "");
