@@ -29,10 +29,10 @@ class mysqlConector {
     {
 		if ($conn->query($query) === TRUE) {
 		    echo "New record created successfully<br>";
-		    //return true;
+		    return true;
 		} else {
 		    echo "Error: " . $query . "<br>" . $conn->error;
-		    //return false;
+		    return false;
 		}
     }
 
