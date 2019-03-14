@@ -13,7 +13,7 @@ $failnsert = 0;
 //se consulta el punto de partida para la migracion
 $sqlStartPoint = "SELECT * FROM worker";
 $resultStartPoint = $mysql->mysqliQuery($connector, $sqlStartPoint);
-var_dump('aca');
+//var_dump('aca');
 if(is_array($resultStartPoint) && array_key_exists('migrado', $resultStartPoint[0])){
 	$fromDbOrigin = $resultStartPoint[0]['migrado'];
 }
@@ -23,7 +23,6 @@ $sqlGetyData = "SELECT * FROM node limit ".NUMBER_ITEMS_MIGRATE. " offset ".$fro
 $resultoriginDb = $mysql->mysqliQuery($connector, $sqlGetyData);
 var_dump($sqlGetyData);
 //var_dump($resultoriginDb);
-//$mysql->mysqliClose($connector);
 
 //validate the result
 if($resultoriginDb && is_array ($resultoriginDb)){	
@@ -56,28 +55,21 @@ if($resultoriginDb && is_array ($resultoriginDb)){
 				$failnsert++;
 			}
 			//var_dump('tras insertar');
-			$mysql2->mysqliClose($connector2);
+			
 		}else{//the record exist in destiny db
 
 		}
+		$mysql2->mysqliClose($connector2);
+
 	}
 	
-	$updateStartPoint = $successInsert + $failnsert;
+	//$updateStartPoint = $successInsert + $failnsert;
+	$updateStartPoint = $fromDbOrigin + NUMBER_ITEMS_MIGRATE;
 	$sqlUpdateStartPoint = "UPDATE worker SET migrado = ".$updateStartPoint. " WHERE id=1";
+	var_dump('valor a actualizar '.$sqlUpdateStartPoint);
 	$mysql->mysqliQuery($connector, $sqlUpdateStartPoint);
+	$mysql->mysqliClose($connector);
 
-	//update file
-	/*$data = [];
-	$data['contenido'] = [];
-	$data['contenido']['migrado'] = $fromDbOrigin + NUMBER_ITEMS_MIGRATE;
-	var_dump($data);
-	$data['contenido']['migrado'] = "asasasasas-".$data['contenido']['migrado'];
-	var_dump('aca');
-	var_dump($data);
-	//file_put_contents($fichero, '');
-	file_put_contents($fichero, json_encode($data));
-	//file_put_contents($fichero2, $test);
-	var_dump(file_get_contents($fichero));*/
 }else{
 	
 }
