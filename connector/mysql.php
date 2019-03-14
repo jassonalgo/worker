@@ -31,7 +31,7 @@ class mysqlConector {
 		    echo "New record created successfully<br>";
 		    return true;
 		} else {
-		    echo "Error: " . $query . "<br>" . $conn->error;
+		    echo "Error de insersion: " . $query . "<br>" . $conn->error;
 		    return false;
 		}
     }
